@@ -100,7 +100,7 @@ var CanvasCycle = {
 			this.sceneIdx = initialSceneIdx;
 
 			
-			setInterval(this.jumpScene.bind(this, 1), 36000);
+			setInterval(this.jumpScene.bind(this, 1), 3600000);
 		}
 	},
 
