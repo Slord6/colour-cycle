@@ -529,8 +529,103 @@ var CanvasCycle = {
 		$('btn_blendshift_off').setClass('selected', !enabled);
 		this.settings.blendShiftEnabled = enabled;
 		this.saveSettings();
+	},
+
+	withinHoursOf: function(hours, time) {
+		let fromToTime = Math.abs(new Date().getTime() - time.getTime());
+		let hoursSinceToTime = fromToTime / 1000 / 60 / 60;
+		return hoursSinceToTime <= hours;
+	},
+
+	bestWeatherMatchScene: function(position) {
+		Weather.getWeatherFor(position.coords.latitude, position.coords.longitude, (weather) => {
+			if (weather === null) {
+				console.error("No weather!");
+				return;
+			}
+			let currentWeatherName = Weather.codeToWeather(weather.weather[0].id);
+
+			// Find weather-matching scenes
+			let matches = scenes.filter(scene => scene.weather.toUpperCase() == currentWeatherName.toUpperCase());
+
+			// Now try and match time of day
+			let sunrise = new Date(weather.sys.sunrise * 1000);
+			let sunset = new Date(weather.sys.sunset * 1000);
+			let now = new Date();
+			let isDay = now > sunrise && now < sunset;
+			
+			let validTimes;
+			if(isDay) {
+				validTimes = ["DAY"];
+				let midday = new Date((sunrise.getTime() + sunset.getTime()) / 2);
+
+				// morning or afternoon?
+				validTimes.push(now < midday ? "MORNING" : "AFTERNOON");
+
+				// if within an hour of midday, that's valid
+				if(CC.withinHoursOf(1, midday)) {
+					validTimes.push("NOON");
+				}
+			} else {
+				validTimes = [
+					"NIGHT"
+				];
+			}
+
+			// if within an hour of sunset, evening is valid
+			if(CC.withinHoursOf(1, sunset)) {
+				validTimes.push("EVENING");
+			}
+
+			let fullMatches = matches.filter(scene => validTimes.includes(scene.time.toUpperCase()));
+			
+			let choice;
+			// perfect match is possible
+			if(fullMatches.length > 0) {
+				// avoid cycling on every check of weather
+				if(fullMatches.includes(scenes[this.sceneIdx])) {
+					choice = scenes[this.sceneIdx];
+				} else {
+					choice = fullMatches[Random(fullMatches.length)];
+				}
+			}
+			// otherwise match weather
+			else if(matches.length > 0) {
+				// avoid cycling on every check of weather
+				if(matches.includes(scenes[this.sceneIdx])) {
+					choice = scenes[this.sceneIdx];
+				} else {
+					choice = matches[Random(matches.length)];
+				}
+			}
+			// otherwise, don't change
+			else {
+				choice = scenes[this.sceneIdx];
+			}
+
+			let newSceneIndex = scenes.indexOf(choice);
+			// return if we're going to change to the same scene
+			if(this.sceneIdx == newSceneIndex ) return;
+			this.sceneIdx = newSceneIndex;
+			$('fe_scene').selectedIndex = this.sceneIdx;
+			CC.switchScene( $('fe_scene') );
+		});
+
 	}
 
 };
 
 var CC = CanvasCycle; // shortcut
+
+let updateWithWeatherTime = function () {
+	if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(CC.bestWeatherMatchScene);
+	} else {
+		CC.bestWeatherMatchScene("London");
+		console.error("No geolocation");
+	}
+}
+updateWithWeatherTime();
+// update every 2 minutes
+setInterval(updateWithWeatherTime, 60 * 1000 * 2);
+

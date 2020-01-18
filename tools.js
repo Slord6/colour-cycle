@@ -30,6 +30,10 @@ function $(thingy) {
 	return obj;
 }
 
+function Random(exclusiveMax) {
+	return Math.floor((Math.random() * exclusiveMax));
+}
+
 function GetTickCount() {
 	// milliseconds since page load
 	return Math.floor( (new Date()).getTime() - CanvasCycle.globalTimeStart );
