@@ -405,6 +405,7 @@ var CanvasCycle = {
 			if(fullMatches.length > 0) {
 				// avoid cycling on every check of weather
 				if(fullMatches.includes(scenes[this.sceneIdx])) {
+					console.log("Current scene valid (perfect match)");
 					choice = scenes[this.sceneIdx];
 				} else {
 					choice = fullMatches[Random(fullMatches.length)];
@@ -414,6 +415,7 @@ var CanvasCycle = {
 			else if(matches.length > 0) {
 				// avoid cycling on every check of weather
 				if(matches.includes(scenes[this.sceneIdx])) {
+					console.log("Current scene valid (weather match)");
 					choice = scenes[this.sceneIdx];
 				} else {
 					choice = matches[Random(matches.length)];
@@ -421,6 +423,7 @@ var CanvasCycle = {
 			}
 			// otherwise, don't change
 			else {
+				console.log("Current scene valid (no alternative)");
 				choice = scenes[this.sceneIdx];
 			}
 
@@ -439,6 +442,7 @@ var CanvasCycle = {
 var CC = CanvasCycle; // shortcut
 
 let updateWithWeatherTime = function () {
+	console.log("Checking for scene change");
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(CC.bestWeatherMatchScene);
 	} else {
