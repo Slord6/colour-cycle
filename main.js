@@ -3,11 +3,9 @@
 // Copyright (c) 2001-2002, 2010 Joseph Huckaby.
 // Released under the LGPL v3.0: http://www.opensource.org/licenses/lgpl-3.0.html
 
-FrameCount.visible = false;
 
 var CanvasCycle = {
 	
-	cookie: new CookieTree(),
 	ctx: null,
 	imageData: null,
 	clock: 0,
@@ -46,7 +44,6 @@ var CanvasCycle = {
 			$('container').style.display = 'block';
 			$('d_options').style.display = 'none';
 		
-			FrameCount.init();
 			this.handleResize();
 		
 			var pal_disp = $('palette_display');
@@ -79,22 +76,6 @@ var CanvasCycle = {
 			
 			// force settings
 			this.setZoom(true);
-			
-			// read prefs from cookie
-			var prefs = this.cookie.get('settings');
-			if (prefs) {
-				if (prefs.showOptions) this.toggleOptions();
-				this.setRate( prefs.targetFPS );
-				this.setZoom( prefs.zoomFull );
-				this.setSpeed( prefs.speedAdjust );
-				this.setBlendShift( prefs.blendShiftEnabled );
-				this.setSound( prefs.sound );
-			}
-			
-			// allow query to control sound
-			if (location.href.match(/\bsound\=(\d+)/)) {
-				this.setSound( !!parseInt(RegExp.$1, 10) );
-			}
 		
 			this.loadImage( scenes[initialSceneIdx].name );
 			this.sceneIdx = initialSceneIdx;
@@ -249,8 +230,6 @@ var CanvasCycle = {
 					div.style.backgroundColor = 'rgb(' + clr.red + ',' + clr.green + ',' + clr.blue + ')';
 				}
 		
-				// if (this.clock % this.settings.targetFPS == 0) $('d_debug').innerHTML = 'FPS: ' + FrameCount.current;
-				$('d_debug').innerHTML = 'FPS: ' + FrameCount.current + ((this.highlightColor != -1) ? (' - Color #' + this.highlightColor) : '');
 			}
 	
 			this.bmp.palette.cycle( this.bmp.palette.baseColors, GetTickCount(), this.settings.speedAdjust, this.settings.blendShiftEnabled );
@@ -269,7 +248,6 @@ var CanvasCycle = {
 	
 			TweenManager.logic( this.clock );
 			this.clock++;
-			FrameCount.count();
 			this.scaleAnimate();
 			if (this.inGame) setTimeout( function() { CanvasCycle.animate(); }, 1000 / this.settings.targetFPS );
 		}
@@ -341,67 +319,13 @@ var CanvasCycle = {
 	},
 	
 	saveSettings: function() {
-		// save settings in cookie
-		this.cookie.set( 'settings', this.settings );
-		this.cookie.save();
+		// removed
 	},
 	
 	startSceneAudio: function() {
-		// start audio for current scene, if applicable
-		var scene = scenes[ this.sceneIdx ];
-		if (false && scene.sound && this.settings.sound && window.Audio) {
-			if (this.audioTrack) {
-				try { this.audioTrack.pause(); } catch(e) {;}
-			}
-			TweenManager.removeAll({ category: 'audio' });
-			
-			var ext = (ua.ff || ua.op) ? 'ogg' : 'mp3';
-			var track = this.audioTrack = new Audio( 'audio/' + scene.sound + '.' + ext );
-			track.volume = 0;
-			track.loop = true;
-			track.autobuffer = false;
-			track.autoplay = true;
-			
-			track.addEventListener('canplaythrough', function() {
-				track.play();
-				TweenManager.tween({
-					target: track,
-					duration: Math.floor( CanvasCycle.settings.targetFPS * 2 ),
-					mode: 'EaseOut',
-					algo: 'Linear',
-					props: { volume: scene.maxVolume || CanvasCycle.defaultMaxVolume },
-					category: 'audio'
-				});
-				CanvasCycle.hideLoading();
-				CanvasCycle.run();
-			}, false);
-			
-			if (ua.iphone || ua.ipad) {
-				// these may support audio, but just don't invoke events
-				// try to force it
-				setTimeout( function() {
-					track.play(); 
-					track.volume = 1.0;
-					CanvasCycle.hideLoading();
-					CanvasCycle.run();
-				}, 1000 );
-			}
-			
-			if (ua.ff || ua.mobile) {
-				// loop doesn't seem to work on FF or mobile devices, so let's force it
-				track.addEventListener('ended', function() {
-					track.currentTime = 0;
-					track.play();
-				}, false);
-			}
-			
-			track.load();
-		} // sound enabled and supported
-		else {
-			// no sound for whatever reason, so just start main loop
-			this.hideLoading();
-			this.run();
-		}
+		// ignore audio, we don't support it
+		this.hideLoading();
+		this.run();
 	},
 	
 	stopSceneAudio: function() {
@@ -484,26 +408,6 @@ var CanvasCycle = {
 			$('btn_zoom_actual').setClass('selected', !enabled);
 			$('btn_zoom_max').setClass('selected', enabled);
 		}
-	},
-
-	setSound: function(enabled) {
-		$('btn_sound_on').setClass('selected', enabled);
-		$('btn_sound_off').setClass('selected', !enabled);
-		this.settings.sound = enabled;
-		
-		if (this.sceneIdx > -1) {
-			if (enabled) {
-				// enable sound
-				if (this.audioTrack) this.audioTrack.play();
-				else this.startSceneAudio();
-			}
-			else {
-				// disable sound
-				if (this.audioTrack) this.audioTrack.pause();
-			}
-		}
-		
-		this.saveSettings();
 	},
 
 	setRate: function(rate) {
