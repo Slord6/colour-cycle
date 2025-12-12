@@ -1,0 +1,177 @@
+[
+    {
+        "value": "V08AM",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V08AM&callback=CanvasCycle.processImage",
+        "name": "Jungle Waterfall - Morning"
+    },
+    {
+        "value": "V29",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V29&callback=CanvasCycle.processImage",
+        "name": "Seascape - Day"
+    },
+    {
+        "value": "V19",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V19&callback=CanvasCycle.processImage",
+        "name": "Mountain Stream - Morning"
+    },
+    {
+        "value": "V26SNOW",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V26SNOW&callback=CanvasCycle.processImage",
+        "name": "Winter Forest - Snow"
+    },
+    {
+        "value": "V08RAIN",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V08RAIN&callback=CanvasCycle.processImage",
+        "name": "Jungle Waterfall - Rain"
+    },
+    {
+        "value": "V14",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V14&callback=CanvasCycle.processImage",
+        "name": "Mountain Storm - Day"
+    },
+    {
+        "value": "V30",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V30&callback=CanvasCycle.processImage",
+        "name": "Deep Forest - Day"
+    },
+    {
+        "value": "V04",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V04&callback=CanvasCycle.processImage",
+        "name": "Highland Ruins - Rain"
+    },
+    {
+        "value": "V07",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V07&callback=CanvasCycle.processImage",
+        "name": "Rough Seas - Day"
+    },
+    {
+        "value": "V20",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V20&callback=CanvasCycle.processImage",
+        "name": "Crystal Caves - Day"
+    },
+    {
+        "value": "V05RAIN",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V05RAIN&callback=CanvasCycle.processImage",
+        "name": "Haunted Castle Ruins - Rain"
+    },
+    {
+        "value": "V08PM",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V08PM&callback=CanvasCycle.processImage",
+        "name": "Jungle Waterfall - Night"
+    },
+    {
+        "value": "V16RAIN",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V16RAIN&callback=CanvasCycle.processImage",
+        "name": "Mirror Pond - Rain"
+    },
+    {
+        "value": "V19AURA",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V19AURA&callback=CanvasCycle.processImage",
+        "name": "Mountain Stream - Night"
+    },
+    {
+        "value": "CORAL",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=CORAL&callback=CanvasCycle.processImage",
+        "name": "Aquarius - Day"
+    },
+    {
+        "value": "V15",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V15&callback=CanvasCycle.processImage",
+        "name": "Harbor Town - Night"
+    },
+    {
+        "value": "V30RAIN",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V30RAIN&callback=CanvasCycle.processImage",
+        "name": "Deep Forest - Rain"
+    },
+    {
+        "value": "V02",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V02&callback=CanvasCycle.processImage",
+        "name": "Mountain Fortress - Dusk"
+    },
+    {
+        "value": "V28",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V28&callback=CanvasCycle.processImage",
+        "name": "Water City Gates - Fog"
+    },
+    {
+        "value": "V29PM",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V29PM&callback=CanvasCycle.processImage",
+        "name": "Seascape - Sunset"
+    },
+    {
+        "value": "V16",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V16&callback=CanvasCycle.processImage",
+        "name": "Mirror Pond - Morning"
+    },
+    {
+        "value": "V01",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V01&callback=CanvasCycle.processImage",
+        "name": "Island Fires - Dusk"
+    },
+    {
+        "value": "V09",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V09&callback=CanvasCycle.processImage",
+        "name": "Forest Edge - Day"
+    },
+    {
+        "value": "V16PM",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V16PM&callback=CanvasCycle.processImage",
+        "name": "Mirror Pond - Afternoon"
+    },
+    {
+        "value": "V08",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V08&callback=CanvasCycle.processImage",
+        "name": "Jungle Waterfall - Afternoon"
+    },
+    {
+        "value": "V03",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V03&callback=CanvasCycle.processImage",
+        "name": "Swamp Cathedral - Day"
+    },
+    {
+        "value": "V05HAUNT",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V05HAUNT&callback=CanvasCycle.processImage",
+        "name": "Haunted Castle Ruins - Night"
+    },
+    {
+        "value": "V10",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V10&callback=CanvasCycle.processImage",
+        "name": "Deep Swamp - Day"
+    },
+    {
+        "value": "V11AM",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V11AM&callback=CanvasCycle.processImage",
+        "name": "Approaching Storm - Day"
+    },
+    {
+        "value": "V13",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V13&callback=CanvasCycle.processImage",
+        "name": "Pond Ripples - Dawn"
+    },
+    {
+        "value": "V17",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V17&callback=CanvasCycle.processImage",
+        "name": "Ice Wind - Day"
+    },
+    {
+        "value": "V19PM",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V19PM&callback=CanvasCycle.processImage",
+        "name": "Mountain Stream - Afternoon"
+    },
+    {
+        "value": "V25HEAT",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V25HEAT&callback=CanvasCycle.processImage",
+        "name": "Desert Heat Wave - Day"
+    },
+    {
+        "value": "V27",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V27&callback=CanvasCycle.processImage",
+        "name": "Magic Marsh Cave - Night"
+    },
+    {
+        "value": "V29FOG",
+        "url": "http://www.effectgames.com/demos/canvascycle/image.php?file=V29FOG&callback=CanvasCycle.processImage",
+        "name": "Seascape - Fog"
+    }
+]

@@ -1,3 +1,4 @@
 /images/*
 !/images/TESTRAMP.LBM.json
+!/images/source_files.json
 keys.js
