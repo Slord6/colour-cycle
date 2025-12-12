@@ -42,23 +42,8 @@ var CanvasCycle = {
 		if (!this.inited) {
 			this.inited = true;
 			$('container').style.display = 'block';
-			$('d_options').style.display = 'none';
 		
 			this.handleResize();
-		
-			var pal_disp = $('palette_display');
-			for (var idx = 0, len = 256; idx < len; idx++) {
-				var div = document.createElement('div');
-				div._idx = idx;
-				div.id = 'pal_' + idx;
-				div.className = 'palette_color';
-				div.onmouseover = function() { CanvasCycle.highlightColor = this._idx; };
-				div.onmouseout = function() { CanvasCycle.highlightColor = -1; };
-				pal_disp.appendChild( div );
-			}
-			var div = document.createElement('div');
-			div.className = 'clear';
-			pal_disp.appendChild( div );
 		
 			// pick starting scene
 			// var initialSceneIdx = Math.floor( Math.random() * scenes.length );
@@ -365,8 +350,6 @@ var CanvasCycle = {
 			startValue = 0;
 			if (this.optTween) startValue = this.optTween.target.value;
 			endValue = 1.0;
-			$('d_options').style.display = '';
-			$('d_options').style.opacity = startValue;
 			$('btn_options_toggle').innerHTML = '&#x00AB; Hide Options';
 		}
 		else {
@@ -383,15 +366,12 @@ var CanvasCycle = {
 			algo: 'Quadratic',
 			props: { value: endValue },
 			onTweenUpdate: function(tween) {
-				// $('d_options').style.left = '' + Math.floor(tween.target.value - 150) + 'px';
-				$('d_options').style.opacity = tween.target.value;
 				$('btn_options_toggle').style.left = '' + Math.floor(tween.target.value * 128) + 'px';
 			
 				CanvasCycle.contentSize.optionsWidth = Math.floor( tween.target.value * 150 );
 				CanvasCycle.handleResize();
 			},
 			onTweenComplete: function(tween) {
-				if (tween.target.value == 0) $('d_options').style.display = 'none';
 				CanvasCycle.optTween = null;
 			},
 			category: 'options'
@@ -405,8 +385,6 @@ var CanvasCycle = {
 		if (enabled != this.settings.zoomFull) {
 			this.settings.zoomFull = enabled;
 			this.saveSettings();
-			$('btn_zoom_actual').setClass('selected', !enabled);
-			$('btn_zoom_max').setClass('selected', enabled);
 		}
 	},
 

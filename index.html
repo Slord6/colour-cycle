@@ -29,41 +29,11 @@
 			<div id="d_scene_btns">
 				<div class="button left" onClick="CC.jumpScene(-1)">&lt; Prev</div><div class="button right" onClick="CC.jumpScene(1)">Next &gt;</div>
 			</div>
-			<div id="d_options_control">
-				<div id="btn_options_toggle" class="button left right" onClick="CC.toggleOptions()">Show Options &#x00BB;</div>
-			</div>
 			<div class="clear"></div>
 		</div>
 		<div id="d_loading"></div>
 		
 		<canvas id="mycanvas" width="640" height="480" style=""></canvas>
-		
-		<div id="d_options">
-			<div class="label">SOUND:</div>
-			<div class="section">
-				<div id="btn_sound_off" class="button left" onClick="CC.setSound(false)">Off</div><div id="btn_sound_on" class="button right selected" onClick="CC.setSound(true)">On</div>
-			</div>
-			
-			<div class="label">ZOOM:</div>
-			<div class="section">
-				<div id="btn_zoom_actual" class="button left selected" onClick="CC.setZoom(false)">Actual</div><div id="btn_zoom_max" class="button right" onClick="CC.setZoom(true)">Max</div>
-			</div>
-			
-			<div class="label">CYCLE SPEED:</div>
-			<div class="section">
-				<div id="btn_speed_025" class="button thin left" onClick="CC.setSpeed(0.25)">&frac14;</div><div id="btn_speed_05" class="button thin" onClick="CC.setSpeed(0.5)">&frac12;</div><div id="btn_speed_1" class="button thin selected" onClick="CC.setSpeed(1)">1</div><div id="btn_speed_2" class="button thin" onClick="CC.setSpeed(2)">2</div><div id="btn_speed_4" class="button thin right" onClick="CC.setSpeed(4)">4</div>
-			</div>
-			
-			<div class="label">CYCLE MODE:</div>
-			<div class="section">
-				<div id="btn_blendshift_off" class="button left" onClick="CC.setBlendShift(false)">Standard</div><div id="btn_blendshift_on" class="button right selected" onClick="CC.setBlendShift(true)">Blend</div>
-			</div>
-			
-			<div class="label">PALETTE:</div>
-			<div id="palette_display"></div>
-			
-			<div id="d_debug"></div>
-		</div>
 		
 		<div class="clear"></div>
 

@@ -68,11 +68,6 @@ div.clear {
 	margin-top: 3px;
 }
 
-#d_options_control {
-	float: right;
-	margin-top: 3px;
-}
-
 #btn_options_toggle {
 	position: relative;
 	left: 0px;
@@ -100,16 +95,6 @@ div.clear {
 	
 	-o-transform:translate(0px 0px) scale(1);
 	-o-transform-origin:0px 0px;
-}
-
-#d_options {
-	z-index: 1;
-	position: relative;
-	float: left;
-	width: 150px;
-	height: 480px;
-	/* border:1px solid #444; */
-	margin-left: 15px;
 }
 
 #d_debug {
