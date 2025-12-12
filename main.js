@@ -60,7 +60,7 @@ var CanvasCycle = {
 			$('d_scene_selector').innerHTML = html;
 			
 			// force settings
-			this.setZoom(true);
+			this.maxZoom();
 		
 			this.loadImage( scenes[initialSceneIdx].name );
 			this.sceneIdx = initialSceneIdx;
@@ -187,7 +187,7 @@ var CanvasCycle = {
 		}
 		
 		
-		this.startSceneAudio();
+		this.startScene();
 	},
 	
 	run: function () {
@@ -307,7 +307,7 @@ var CanvasCycle = {
 		// removed
 	},
 	
-	startSceneAudio: function() {
+	startScene: function() {
 		// ignore audio, we don't support it
 		this.hideLoading();
 		this.run();
@@ -342,77 +342,11 @@ var CanvasCycle = {
 		}
 	},
 
-	toggleOptions: function() {
-		var startValue, endValue;
-		TweenManager.removeAll({ category: 'options' });
-	
-		if (!this.settings.showOptions) {
-			startValue = 0;
-			if (this.optTween) startValue = this.optTween.target.value;
-			endValue = 1.0;
-			$('btn_options_toggle').innerHTML = '&#x00AB; Hide Options';
-		}
-		else {
-			startValue = 1.0;
-			if (this.optTween) startValue = this.optTween.target.value;
-			endValue = 0;
-			$('btn_options_toggle').innerHTML = 'Show Options &#x00BB;';
-		}
-	
-		this.optTween = TweenManager.tween({
-			target: { value: startValue },
-			duration: Math.floor( this.settings.targetFPS / 3 ),
-			mode: 'EaseOut',
-			algo: 'Quadratic',
-			props: { value: endValue },
-			onTweenUpdate: function(tween) {
-				$('btn_options_toggle').style.left = '' + Math.floor(tween.target.value * 128) + 'px';
-			
-				CanvasCycle.contentSize.optionsWidth = Math.floor( tween.target.value * 150 );
-				CanvasCycle.handleResize();
-			},
-			onTweenComplete: function(tween) {
-				CanvasCycle.optTween = null;
-			},
-			category: 'options'
-		});
-	
-		this.settings.showOptions = !this.settings.showOptions;
-		this.saveSettings();
-	},
-
-	setZoom: function(enabled) {
-		if (enabled != this.settings.zoomFull) {
-			this.settings.zoomFull = enabled;
-			this.saveSettings();
-		}
-	},
-
-	setRate: function(rate) {
-		/* $('btn_rate_30').setClass('selected', rate == 30);
-		$('btn_rate_60').setClass('selected', rate == 60);
-		$('btn_rate_90').setClass('selected', rate == 90); */
-		this.settings.targetFPS = rate;
+	maxZoom: function() {
+		this.settings.zoomFull = true;
 		this.saveSettings();
 	},
 	
-	setSpeed: function(speed) {
-		$('btn_speed_025').setClass('selected', speed == 0.25);
-		$('btn_speed_05').setClass('selected', speed == 0.5);
-		$('btn_speed_1').setClass('selected', speed == 1);
-		$('btn_speed_2').setClass('selected', speed == 2);
-		$('btn_speed_4').setClass('selected', speed == 4);
-		this.settings.speedAdjust = speed;
-		this.saveSettings();
-	},
-
-	setBlendShift: function(enabled) {
-		$('btn_blendshift_on').setClass('selected', enabled);
-		$('btn_blendshift_off').setClass('selected', !enabled);
-		this.settings.blendShiftEnabled = enabled;
-		this.saveSettings();
-	},
-
 	withinHoursOf: function(hours, time) {
 		let fromToTime = Math.abs(new Date().getTime() - time.getTime());
 		let hoursSinceToTime = fromToTime / 1000 / 60 / 60;
@@ -420,15 +354,18 @@ var CanvasCycle = {
 	},
 
 	bestWeatherMatchScene: function(position) {
+		console.log("Getting weather", position);
 		Weather.getWeatherFor(position.coords.latitude, position.coords.longitude, (weather) => {
 			if (weather === null) {
 				console.error("No weather!");
 				return;
 			}
 			let currentWeatherName = Weather.codeToWeather(weather.weather[0].id);
-
+			console.log("Weather:", currentWeatherName);
+			
 			// Find weather-matching scenes
 			let matches = scenes.filter(scene => scene.weather.toUpperCase() == currentWeatherName.toUpperCase());
+			console.log("Matching weather scenes", matches);
 
 			// Now try and match time of day
 			let sunrise = new Date(weather.sys.sunrise * 1000);
@@ -458,8 +395,10 @@ var CanvasCycle = {
 			if(CC.withinHoursOf(1, sunset)) {
 				validTimes.push("EVENING");
 			}
-
+			
+			console.log("Valid times", validTimes);
 			let fullMatches = matches.filter(scene => validTimes.includes(scene.time.toUpperCase()));
+			console.log("Full matches", fullMatches);
 			
 			let choice;
 			// perfect match is possible
